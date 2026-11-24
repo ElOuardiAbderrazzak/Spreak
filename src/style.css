@@ -171,7 +171,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
   padding: 0 var(--gutter) 24px;
   align-content: start;
 }
-.rail { display: none; }
 .centre { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .detail-col { min-width: 0; }
 
@@ -379,10 +378,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--o-600);
 }
 
-/* ---------- settings panel (rail on desktop, sheet on mobile) ---------- */
+/* ---------- settings panel (lives in the slide-out drawer) ---------- */
 .settings { display: flex; flex-direction: column; }
 .settings h3 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
-/* the sheet supplies its own title row, so the panel's heading only shows in the rail */
+/* the drawer supplies its own title row */
 .sheet .panel-title { display: none; }
 .settings .group { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin: 18px 0 10px; }
 .settings .group:first-of-type { margin-top: 16px; }
@@ -510,6 +509,21 @@ input[type='range']::-moz-range-thumb {
 .grabber { width: 44px; height: 5px; border-radius: var(--pill); background: var(--border-strong); margin: 0 auto 14px; }
 .sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
+@media (min-width: 700px) {
+  .sheet {
+    top: 0; bottom: 0; right: auto;
+    width: min(390px, 92vw);
+    max-height: none;
+    border-radius: 0 28px 28px 0;
+    padding: 24px 24px calc(28px + env(safe-area-inset-bottom));
+    transform: translateX(-103%);
+    box-shadow: 8px 0 40px rgba(64, 36, 13, 0.22);
+  }
+  .sheet.open { transform: translateX(0); }
+  .grabber { display: none; }
+  .sheet-head { margin-bottom: 4px; }
+}
+
 /* ---------- tablet ---------- */
 @media (min-width: 768px) {
   :root { --gutter: 28px; }
@@ -518,10 +532,11 @@ input[type='range']::-moz-range-thumb {
   .brand .mark { width: 36px; height: 36px; }
   .brand h1 { font-size: 24px; }
   .layout {
-    grid-template-columns: minmax(0, 1fr) 330px;
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
     padding-bottom: 32px;
   }
+  .layout.has-detail { grid-template-columns: minmax(0, 1fr) 330px; }
   .centre { gap: 18px; }
   .hero { padding-top: 28px; }
   .suggestions { flex-direction: row; }
@@ -536,31 +551,19 @@ input[type='range']::-moz-range-thumb {
 @media (min-width: 1200px) {
   :root { --gutter: 28px; }
   .layout {
-    grid-template-columns: 300px minmax(0, 1fr) 368px;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
-    max-width: 1440px;
+    max-width: 1280px;
     width: 100%;
     margin: 0 auto;
   }
+  .layout.has-detail { grid-template-columns: minmax(0, 1fr) 368px; }
   .topbar {
     max-width: 1440px; width: 100%; margin: 0 auto;
     border-bottom: 1px solid var(--border);
     padding: 16px var(--gutter);
     margin-bottom: 24px;
   }
-  .rail {
-    display: block;
-    position: sticky;
-    top: 16px;
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    border-radius: 24px;
-    box-shadow: var(--sh-soft);
-    padding: 20px;
-    max-height: calc(100dvh - 140px);
-    overflow-y: auto;
-  }
   .hero { padding-top: 10px; }
   .hero-mascot { width: 200px; }
-  #settings-btn { display: none; }
 }

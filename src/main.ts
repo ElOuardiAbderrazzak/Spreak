@@ -204,6 +204,8 @@ function renderWords() {
 function renderDetail() {
   const host = $('detail-col');
   const w = words[selected];
+  // the detail column only claims grid space once there is something in it
+  document.querySelector('.layout')?.classList.toggle('has-detail', !!w);
   if (!w) {
     host.innerHTML = '';
     return;
@@ -463,17 +465,11 @@ function renderPanel() {
 }
 
 function placePanel() {
-  const desktop = window.matchMedia('(min-width: 1200px)').matches;
-  const host = desktop ? $('rail') : $('sheet-body');
+  const host = $('sheet-body');
   if (panel.parentElement !== host) host.appendChild(panel);
-  if (desktop) closeSheet();
 }
 
 function openSheet() {
-  if (window.matchMedia('(min-width: 1200px)').matches) {
-    $('rail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    return;
-  }
   const sheet = $('sheet');
   sheet.scrollTop = 0;
   sheet.classList.add('open');
@@ -586,7 +582,6 @@ $('scrim').addEventListener('click', closeSheet);
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeSheet();
 });
-window.matchMedia('(min-width: 1200px)').addEventListener('change', placePanel);
 
 textEl.addEventListener('input', () => {
   autoGrow();

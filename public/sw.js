@@ -1,6 +1,6 @@
 // Spreak service worker: app shell works offline after the first visit.
 // Pages: network first (so updates arrive). Everything else same-origin: cache first.
-const CACHE = 'spreak-v2';
+const CACHE = 'spreak-v3';
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) => {

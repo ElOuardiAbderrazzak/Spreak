@@ -283,6 +283,16 @@ const textEl = $<HTMLTextAreaElement>('text');
 function autoGrow() {
   textEl.style.height = 'auto';
   textEl.style.height = Math.min(textEl.scrollHeight, 180) + 'px';
+  $('clear').hidden = textEl.value.length === 0;
+}
+
+function clearInput() {
+  speaker.stop();
+  textEl.value = '';
+  autoGrow();
+  clearTimeout(debounce);
+  void analyse();
+  textEl.focus();
 }
 
 async function analyse(): Promise<boolean> {
@@ -603,6 +613,7 @@ $('stop').addEventListener('click', () => {
   highlight(-1);
   setStatus('');
 });
+$('clear').addEventListener('click', clearInput);
 $('mic').addEventListener('click', () => setStatus('Dictation is not wired up yet — type or paste for now.'));
 $('accent-btn').addEventListener('click', () =>
   setStatus('Standard Dutch (nl-NL), formal register. Belgian Dutch is on the list.'),

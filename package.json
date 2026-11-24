@@ -1,0 +1,28 @@
+{
+  "name": "spreak",
+  "version": "0.1.0",
+  "description": "Dutch pronunciation tool: IPA, stress, and EN/FR/AR respelling with a natural neural voice",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/noto-sans-arabic": "^5.3.0",
+    "@fontsource/plus-jakarta-sans": "^5.3.0",
+    "espeak-ng": "^1.0.2",
+    "hyphen": "^1.14.1",
+    "phonemizer": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  },
+  "private": true,
+  "type": "module"
+}

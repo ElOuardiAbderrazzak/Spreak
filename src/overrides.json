@@ -1,0 +1,3 @@
+{
+  "_comment": "Words where espeak-ng gets the stress or sounds wrong. Key = lowercase word, value = IPA with stress marks placed before the vowel (espeak style), e.g. \"kˈɔrtrɛɪk\". Add your own."
+}
